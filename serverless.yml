@@ -1,0 +1,21 @@
+org: leonanluppi
+app: app-son
+service: app-serverless
+stage: dev
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+
+functions:
+  app:
+    handler: server.start
+    events:
+      - http:
+          path: /
+          method: ANY
+      - http:
+          path: /{proxy+}
+          method: ANY
+plugins:
+  - serverless-offline
